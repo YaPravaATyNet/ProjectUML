@@ -1,6 +1,7 @@
 package com.example.projectuml;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Target implements Serializable {
@@ -10,16 +11,22 @@ public class Target implements Serializable {
     private int hours;
     private int days;
     private GregorianCalendar start;
-    private int progress = 0;
+    private int progress;
     private TargetState state;
 
-    public Target(String name, TargetType type, int quantity, int hours, int day, int progress, TargetState state) {
+    public Target(String name, TargetType type, int quantity, int hours, int day, String start, int progress, TargetState state) {
         this.name = name;
         this.type = type;
         this.quantity = quantity;
         this.hours = hours;
         this.days = day;
         this.start = new GregorianCalendar();
+        this.start.set(Calendar.YEAR, Integer.parseInt(start.split(" ")[0].split("-")[0]));
+        this.start.set(Calendar.MONTH, Integer.parseInt(start.split(" ")[0].split("-")[1]) - 1);
+        this.start.set(Calendar.DAY_OF_MONTH, Integer.parseInt(start.split(" ")[0].split("-")[2]));
+        this.start.set(Calendar.HOUR_OF_DAY, Integer.parseInt(start.split(" ")[2].split(":")[0]));
+        this.start.set(Calendar.MINUTE, Integer.parseInt(start.split(" ")[2].split(":")[1]));
+        this.start.set(Calendar.SECOND, Integer.parseInt(start.split(" ")[2].split(":")[2]));
         this.progress = progress;
         this.state = state;
     }
@@ -78,6 +85,14 @@ public class Target implements Serializable {
 
     public void setProgress(int progress) {
         this.progress = progress;
+    }
+
+    public TargetState getState() {
+        return state;
+    }
+
+    public void setState(TargetState state) {
+        this.state = state;
     }
 
     public String getIdea() {

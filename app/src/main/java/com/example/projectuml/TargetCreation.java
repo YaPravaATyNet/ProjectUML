@@ -9,6 +9,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+
 public class TargetCreation extends AppCompatActivity {
 
     @Override
@@ -33,6 +36,21 @@ public class TargetCreation extends AppCompatActivity {
        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.target_type);
        RadioButton radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
        int type = radioGroup.indexOfChild(radioButton);
+       TargetType targetType;
+       switch (type) {
+           case 0:
+               targetType = TargetType.WORDS;
+               break;
+           case 1:
+               targetType = TargetType.GRAMMAIR_UNIT;
+               break;
+           case 2:
+               targetType = TargetType.LEXIQUE_UNIT;
+               break;
+           default:
+               targetType = TargetType.UNIT;
+               break;
+       }
 
 
        EditText quantity = (EditText) findViewById(R.id.quantity);
@@ -47,5 +65,14 @@ public class TargetCreation extends AppCompatActivity {
            Toast.makeText(v.getContext(), "Время не установлено", Toast.LENGTH_SHORT).show();
            return;
        }
+
+       GregorianCalendar calendar = new GregorianCalendar();
+       SimpleDateFormat start = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
+
+       MainActivity.databaseHelper.insert(nameTarget.getText().toString(), targetType.toString(),
+               Integer.parseInt(quantity.getText().toString()), hourPicker.getValue(),
+               dayPicker.getValue(), start.format(calendar.getTime()), 0, TargetState.NOT_FINISHED.toString());
+
+        finish();
     }
 }

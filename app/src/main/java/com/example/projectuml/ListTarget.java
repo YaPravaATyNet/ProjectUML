@@ -1,6 +1,7 @@
 package com.example.projectuml;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,8 +19,12 @@ public class ListTarget extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_target);
+    }
 
-        fillTargets();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        targets = MainActivity.databaseHelper.getTargets();
         ArrayAdapter<Target> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, targets);
         ListView targetList = (ListView) findViewById(R.id.target_list);
@@ -32,14 +37,6 @@ public class ListTarget extends AppCompatActivity {
                 startActivity(intention);
             }
         });
-
-    }
-
-    private void fillTargets() {
-        Target target = new Target("Raf", TargetType.UNIT, 2, 10, 2, 1, TargetState.NOT_FINISHED);
-        Target target1 = new Target( "Sasha", TargetType.WORDS, 10, 1, 0, 2, TargetState.NOT_FINISHED);
-        targets.add(target);
-        targets.add(target1);
     }
 
     public void createNewTarget(View v) {

@@ -8,11 +8,13 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    static DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        databaseHelper = new DatabaseHelper(getApplicationContext());
     }
 
     public void onClickLearning(View v) {
