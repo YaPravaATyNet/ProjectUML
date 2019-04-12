@@ -15,8 +15,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void onClickLearning(View v) {
+        Intent intention = new Intent(v.getContext(), Learning.class);
+        startActivity(intention);
+    }
+
     public void onClickTarget(View v) {
         Intent intention = new Intent(v.getContext(), ListTarget.class);
         startActivity(intention);
     }
+
+    public void onClickStatistics(View v) {
+        Intent intention = new Intent(v.getContext(), Statistics.class);
+        startActivity(intention);
+    }
+
+    public void onClickHelp(View v) {
+        Intent intention = new Intent(v.getContext(), Help.class);
+        startActivity(intention);
+    }
+
+    public void onClickFeedback(View v) {
+        Intent intention = new Intent(v.getContext(), Feedback.class);
+        startActivity(intention);
+    }
+
 }

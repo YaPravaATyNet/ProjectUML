@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="11"
-        android:text="Learn"/>
+        android:text="Learning"
+        android:onClick="onClickLearning"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,18 +37,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="11"
-        android:text="Statistics"/>
+        android:text="Statistics"
+        android:onClick="onClickStatistics"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="11"
-        android:text="Help"/>
+        android:text="Help"
+        android:onClick="onClickHelp"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="11"
-        android:text="Leave feedback"/>
+        android:text="Leave feedback"
+        android:onClick="onClickFeedback"/>
 
 </LinearLayout>
