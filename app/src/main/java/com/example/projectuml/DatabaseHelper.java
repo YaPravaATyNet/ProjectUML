@@ -58,9 +58,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<Target> getTargets() {
         ArrayList<Target> targets = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        //Cursor cursor = db.query(TABLE, null, null, null,null,null,null);
         Cursor cursor = db.rawQuery("select * from " + TABLE, null);
         while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
             String name = cursor.getString(1);
             TargetType type = TargetType.valueOf(cursor.getString(2));
             int quantity = cursor.getInt(3);
@@ -69,12 +69,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String start = cursor.getString(6);
             int progress = cursor.getInt(7);
             TargetState state = TargetState.valueOf(cursor.getString(8));
-            Target target = new Target(name, type, quantity, hours, days, start, progress, state);
+            Target target = new Target(id, name, type, quantity, hours, days, start, progress, state);
             targets.add(target);
         }
         cursor.close();
         db.close();
         return  targets;
+    }
+
+    public void updateState(int id, String newState) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE " + TABLE + " SET " + COLUMN_STATE + " = '" + newState + "' WHERE " + COLUMN_ID + " = " + id);
+        db.close();
     }
 
 }

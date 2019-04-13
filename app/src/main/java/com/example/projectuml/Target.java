@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Target implements Serializable {
+    private int id;
     private String name;
     private TargetType type;
     private int quantity;
@@ -14,7 +15,8 @@ public class Target implements Serializable {
     private int progress;
     private TargetState state;
 
-    public Target(String name, TargetType type, int quantity, int hours, int day, String start, int progress, TargetState state) {
+    public Target(int id, String name, TargetType type, int quantity, int hours, int day, String start, int progress, TargetState state) {
+        this.id = id;
         this.name = name;
         this.type = type;
         this.quantity = quantity;
@@ -29,6 +31,14 @@ public class Target implements Serializable {
         this.start.set(Calendar.SECOND, Integer.parseInt(start.split(" ")[2].split(":")[2]));
         this.progress = progress;
         this.state = state;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -95,22 +105,34 @@ public class Target implements Serializable {
         this.state = state;
     }
 
-    public String getIdea() {
+    public String getDescription() {
         String formDay = " дней, ";
         String formHour = " часов ";
-        String formType = " юнитов за ";
-        if (days < 5 && days > 1)
+        String formType = " cлов за ";
+        if (days % 10 < 5 && days % 10 > 1)
             formDay = " дня, ";
-        if (hours < 5 && hours > 1)
+        if (days % 10 == 1)
+            formDay = " день, ";
+        if (hours % 10 < 5 && hours % 10 > 1)
             formHour = " часа ";
-        if (type == TargetType.WORDS) {
-            formType = " слов за ";
+        if (hours % 10 == 1)
+            formHour = " час ";
+        switch (type) {
+            case GRAMMAIR_UNIT:
+                formType = " грамматических юнитов за ";
+                break;
+            case LEXIQUE_UNIT:
+                formType = " лексических юнитов за ";
+                break;
+            case UNIT:
+                formType = " юнитов за ";
+                break;
         }
         return quantity + formType + days + formDay + hours + formHour;
     }
 
     @Override
     public String toString() {
-        return name + '\n' + getIdea();
+        return name + '\n' + getDescription();
     }
 }

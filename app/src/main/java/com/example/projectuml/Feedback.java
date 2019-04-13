@@ -16,6 +16,6 @@ public class Feedback extends AppCompatActivity {
 
     public void send(View v) {
         Toast.makeText(v.getContext(), "Отзыв отправлен", Toast.LENGTH_LONG).show();
-        return;
+        finish();
     }
 }

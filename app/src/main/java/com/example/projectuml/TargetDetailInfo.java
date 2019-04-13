@@ -20,7 +20,7 @@ public class TargetDetailInfo extends AppCompatActivity {
         name.setText(target.getName());
 
         TextView idea = (TextView) findViewById(R.id.idea_target);
-        idea.setText("Выучить " + target.getIdea());
+        idea.setText("Выучить " + target.getDescription());
 
         TextView start = (TextView) findViewById(R.id.time_start);
         start.setText("Время старта: " + target.getStart().getTime());
@@ -52,7 +52,7 @@ public class TargetDetailInfo extends AppCompatActivity {
             case NOT_FINISHED:
                 if (curDate.after(date.getTime())) {
                     state.setText("Cтатус: Время вышло");
-                    //апдейтить бд
+                    MainActivity.databaseHelper.updateState(target.getId(), TargetState.NOT_SUCCES.toString());
                 } else {
                     state.setText("Cтатус: В процессе");
                 }
