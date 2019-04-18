@@ -16,13 +16,15 @@
         android:layout_weight="11"
         android:layout_marginTop="120dp"
         android:layout_marginBottom="20dp"
-        android:text="Grammar" />
+        android:text="Grammar"
+        android:onClick="onClickGrammar"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="11"
-        android:text="Vocabulary"/>
+        android:text="Vocabulary"
+        android:onClick="onClickVocabulary"/>
 
 
 </LinearLayout>

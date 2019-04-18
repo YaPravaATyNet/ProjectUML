@@ -1,20 +1,22 @@
 package com.example.projectuml;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.projectuml.db.DatabaseHelper;
+
 public class MainActivity extends AppCompatActivity {
 
-    static DatabaseHelper databaseHelper;
+    public static final String EXTRA_MESSAGE = "UNIT_TYPE";
+    //static DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        databaseHelper = new DatabaseHelper(getApplicationContext());
+        //databaseHelper = new DatabaseHelper(getApplicationContext());
     }
 
     public void onClickLearning(View v) {
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickTarget(View v) {
-        Intent intention = new Intent(v.getContext(), ListTarget.class);
+        Intent intention = new Intent(v.getContext(), TargetList.class);
         startActivity(intention);
     }
 

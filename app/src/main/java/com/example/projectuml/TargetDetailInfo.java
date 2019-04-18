@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.projectuml.db.DatabaseHelper;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -41,6 +43,8 @@ public class TargetDetailInfo extends AppCompatActivity {
         long dif = (curDate.getTime() - target.getStart().getTime().getTime()) / 60000;
         timePass.setProgress((int) dif);
 
+        DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+
         TextView state = (TextView) findViewById(R.id.state_target);
         switch (target.getState()) {
             case SUCCES:
@@ -52,7 +56,7 @@ public class TargetDetailInfo extends AppCompatActivity {
             case NOT_FINISHED:
                 if (curDate.after(date.getTime())) {
                     state.setText("Cтатус: Время вышло");
-                    MainActivity.databaseHelper.updateState(target.getId(), TargetState.NOT_SUCCES.toString());
+                    databaseHelper.updateState(target.getId(), TargetState.NOT_SUCCES.toString());
                 } else {
                     state.setText("Cтатус: В процессе");
                 }

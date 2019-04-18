@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Feedback"></activity>
+        <activity android:name=".Feedback" />
         <activity android:name=".Help" />
         <activity android:name=".Statistics" />
         <activity android:name=".Learning" />
         <activity android:name=".TargetCreation" />
         <activity android:name=".TargetDetailInfo" />
-        <activity android:name=".ListTarget" />
+        <activity android:name=".TargetList" />
+        <activity android:name=".view.Unit_List" />
+        <activity android:name=".view.Unit"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

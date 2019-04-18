@@ -9,6 +9,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.projectuml.db.DatabaseHelper;
+
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
@@ -69,7 +71,8 @@ public class TargetCreation extends AppCompatActivity {
        GregorianCalendar calendar = new GregorianCalendar();
        SimpleDateFormat start = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
 
-       MainActivity.databaseHelper.insert(nameTarget.getText().toString(), targetType.toString(),
+       DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+       databaseHelper.insertTarget(nameTarget.getText().toString(), targetType.toString(),
                Integer.parseInt(quantity.getText().toString()), hourPicker.getValue(),
                dayPicker.getValue(), start.format(calendar.getTime()), 0, TargetState.NOT_FINISHED.toString());
 

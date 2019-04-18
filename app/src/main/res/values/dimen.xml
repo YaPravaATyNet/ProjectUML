@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="textSizeRadio">18sp</dimen>
+    <dimen name="text">20sp</dimen>
+    <dimen name="text_small">8sp</dimen>
 </resources>

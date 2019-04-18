@@ -9,9 +9,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.projectuml.db.DatabaseHelper;
+
 import java.util.ArrayList;
 
-public class ListTarget extends AppCompatActivity {
+public class TargetList extends AppCompatActivity {
 
     ArrayList<Target> targets = new ArrayList<>();
 
@@ -24,7 +26,8 @@ public class ListTarget extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        targets = MainActivity.databaseHelper.getTargets();
+        DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+        targets = databaseHelper.getTargets();
         ArrayAdapter<Target> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, targets);
         ListView targetList = (ListView) findViewById(R.id.target_list);
