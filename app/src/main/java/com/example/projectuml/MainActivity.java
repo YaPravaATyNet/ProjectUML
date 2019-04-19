@@ -9,14 +9,13 @@ import com.example.projectuml.db.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_MESSAGE = "UNIT_TYPE";
-    //static DatabaseHelper databaseHelper;
+   // public static final String EXTRA_MESSAGE = "UNIT_TYPE";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //databaseHelper = new DatabaseHelper(getApplicationContext());
     }
 
     public void onClickLearning(View v) {

@@ -19,6 +19,9 @@ import com.example.projectuml.view.V_Task_3_fragment;
 import com.example.projectuml.view.V_Task_4_fragment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -345,10 +348,89 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return  targets;
     }
 
-    public void updateState(int id, String newState) {
+    public void updateTargetState(int id, String newState) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("UPDATE " + TABLE_TARGETS + " SET " + COLUMN_TARGET_STATE + " = '" + newState + "' WHERE " + COLUMN_TARGET_ID + " = " + id);
         db.close();
+    }
+
+    public void updateTargetProgress(String unitName) {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_UNIT_ID + ", " + COLUMN_UNIT_TYPE + " FROM " + TABLE_UNITS + " WHERE " + COLUMN_UNIT_NAME + " = '" + unitName + "'", null);
+        cursor.moveToFirst();
+        int idUnit = cursor.getInt(0);
+        int unitType = cursor.getInt(1);
+        String SQLRequest = "SELECT " + COLUMN_TARGET_ID + " , " + COLUMN_TARGET_PROGRESS + " , " + COLUMN_TARGET_QUANTITY + " , " + COLUMN_TARGET_START + " , " + COLUMN_TARGET_HOURS + " , " + COLUMN__TARGET_DAYS + " , " + COLUMN_TARGET_TYPE + " FROM " + TABLE_TARGETS + " WHERE " + COLUMN_TARGET_STATE + " = '" + TargetState.NOT_FINISHED.toString() + "'";
+        if (unitType == 0) {
+            SQLRequest += " AND (" + COLUMN_TARGET_TYPE + " = '" + TargetType.GRAMMAIR_UNIT + "' OR " + COLUMN_TARGET_TYPE + " = '" + TargetType.UNIT  + "')";
+        }
+        else {
+            SQLRequest += " AND (" + COLUMN_TARGET_TYPE + " = '" + TargetType.LEXIQUE_UNIT + "' OR " + COLUMN_TARGET_TYPE + " = '" + TargetType.UNIT + "' OR " + COLUMN_TARGET_TYPE + " = '" + TargetType.WORDS  + "')";
+        }
+        log(SQLRequest);
+        cursor = db.rawQuery(SQLRequest, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            int current =  cursor.getInt(1);
+            int quantity = cursor.getInt(2);
+            if (cursor.getString(6).equals(TargetType.WORDS.toString())) {
+                Cursor cursorTask = db.rawQuery("SELECT * FROM " + TABLE_TASKS + " WHERE " + COLUMN_TASK_ID_UNIT + " = " + idUnit, null);
+                cursor.moveToFirst();
+                current += cursorTask.getCount();
+                cursorTask.close();
+            } else {
+                current++;
+            }
+            String SQLRequestUpdate = "UPDATE " + TABLE_TARGETS + " SET " + COLUMN_TARGET_PROGRESS + " = '" + current + "' WHERE " + COLUMN_TARGET_ID + " = " + id;
+            db.execSQL(SQLRequestUpdate);
+            if (current == quantity) {
+                GregorianCalendar start = Target.parseString(cursor.getString(3));
+                start.add(Calendar.DAY_OF_MONTH, cursor.getInt(5));
+                start.add(Calendar.HOUR_OF_DAY, cursor.getInt(4));
+                Date curDate = new Date();
+                if (curDate.after(start.getTime())) {
+                    updateTargetState(id, TargetState.NOT_SUCCES.toString());
+                } else {
+                    updateTargetState(id, TargetState.SUCCES.toString());
+                }
+            }
+        }
+        cursor.close();
+        db.close();
+    }
+
+    public int getReadyUnit(int type) {
+        SQLiteDatabase db = getReadableDatabase();
+        int readyUnits = 0;
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_UNIT_ID + " FROM " + TABLE_UNITS + " WHERE " + COLUMN_UNIT_TYPE + " = " + type, null);
+        while(cursor.moveToNext()) {
+            int readyTask = 0;
+            int idUnit = cursor.getInt(0);
+            Cursor cursorTask = db.rawQuery("SELECT " + COLUMN_TASK_STATE + " FROM " + TABLE_TASKS + " WHERE " + COLUMN_TASK_ID_UNIT + " = " + idUnit, null);
+            while (cursorTask.moveToNext()) {
+                int stateTask = cursorTask.getInt(0);
+                if (stateTask == 1) {
+                    readyTask++;
+                }
+            }
+            if (readyTask == cursorTask.getCount() && readyTask != 0) {
+                readyUnits++;
+            }
+        }
+        cursor.close();
+        db.close();
+        return readyUnits;
+    }
+
+    public int getReadyWords() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_UNITS + " JOIN " + TABLE_TASKS + " ON " +
+                TABLE_UNITS + "." + COLUMN_UNIT_ID + " = " + COLUMN_TASK_ID_UNIT + " WHERE " + TABLE_UNITS + "." + COLUMN_UNIT_TYPE +
+                " = 1 AND " + COLUMN_TASK_STATE + " = 1", null);
+        int words = cursor.getCount();
+        cursor.close();
+        db.close();
+        return words;
     }
 
     public Cursor getAllUnitsByType(SQLiteDatabase db, int type) {

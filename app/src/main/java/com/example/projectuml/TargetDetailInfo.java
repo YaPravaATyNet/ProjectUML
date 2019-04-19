@@ -56,7 +56,7 @@ public class TargetDetailInfo extends AppCompatActivity {
             case NOT_FINISHED:
                 if (curDate.after(date.getTime())) {
                     state.setText("Cтатус: Время вышло");
-                    databaseHelper.updateState(target.getId(), TargetState.NOT_SUCCES.toString());
+                    databaseHelper.updateTargetState(target.getId(), TargetState.NOT_SUCCES.toString());
                 } else {
                     state.setText("Cтатус: В процессе");
                 }

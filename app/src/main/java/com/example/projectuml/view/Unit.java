@@ -94,6 +94,7 @@ public class Unit extends AppCompatActivity implements OnFragmentInteractionList
             }
             current++;
         } else {
+            dbHelper.updateTargetProgress(UNIT_NAME);
             finish();
         }
     }
