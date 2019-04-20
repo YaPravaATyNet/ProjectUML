@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:weightSum="100"
-    tools:context=".Learning">
+    tools:context=".view.Learning">
 
     <Button
         android:layout_width="match_parent"

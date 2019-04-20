@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TargetDetailInfo">
+    tools:context=".view.TargetDetailInfo">
 
     <TextView
         android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package com.example.projectuml;
+package com.example.projectuml.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.projectuml.R;
+import com.example.projectuml.model.TargetState;
+import com.example.projectuml.model.TargetType;
 import com.example.projectuml.db.DatabaseHelper;
 
 import java.text.SimpleDateFormat;
@@ -28,10 +31,10 @@ public class TargetCreation extends AppCompatActivity {
         hourPicker.setMinValue(0);
     }
 
-   public void downloadTarget(View v) {
+   public void downloadTarget(View view) {
        EditText nameTarget = (EditText) findViewById(R.id.name_target);
        if (nameTarget.getText().toString().equals("")) {
-           Toast.makeText(v.getContext(), "Имя цели не введено", Toast.LENGTH_SHORT).show();
+           Toast.makeText(view.getContext(), "Имя цели не введено", Toast.LENGTH_SHORT).show();
            return;
        }
 
@@ -57,14 +60,14 @@ public class TargetCreation extends AppCompatActivity {
 
        EditText quantity = (EditText) findViewById(R.id.quantity);
        if (quantity.getText().toString().equals("")) {
-           Toast.makeText(v.getContext(), "Количество не введено", Toast.LENGTH_SHORT).show();
+           Toast.makeText(view.getContext(), "Количество не введено", Toast.LENGTH_SHORT).show();
            return;
        }
 
        NumberPicker dayPicker = (NumberPicker) findViewById(R.id.days_picker);
        NumberPicker hourPicker = (NumberPicker) findViewById(R.id.hour_picker);
        if (dayPicker.getValue() == 0 && hourPicker.getValue() == 0) {
-           Toast.makeText(v.getContext(), "Время не установлено", Toast.LENGTH_SHORT).show();
+           Toast.makeText(view.getContext(), "Время не установлено", Toast.LENGTH_SHORT).show();
            return;
        }
 

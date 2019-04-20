@@ -19,7 +19,7 @@ import java.util.List;
 public class Unit extends AppCompatActivity implements OnFragmentInteractionListener {
 
     private String UNIT_NAME;
-    private int current;
+    private int currentTask;
     private Fragment currentFragment = null;
 
     public static String QUESTION = "QUESTION";
@@ -70,13 +70,13 @@ public class Unit extends AppCompatActivity implements OnFragmentInteractionList
     }
 
     private void showNextFragment() {
-        if (current != tasks.size()) {
+        if (currentTask != tasks.size()) {
             Bundle bundle = new Bundle();
-            bundle.putString(QUESTION, tasks.get(current).getQuestion());
-            bundle.putString(ANSWER, tasks.get(current).getAnswer());
+            bundle.putString(QUESTION, tasks.get(currentTask).getQuestion());
+            bundle.putString(ANSWER, tasks.get(currentTask).getAnswer());
             Fragment fr = null;
             try {
-                fr = ((Fragment) tasks.get(current).getCls().newInstance());
+                fr = ((Fragment) tasks.get(currentTask).getCls().newInstance());
                 fr.setArguments(bundle);
             } catch (IllegalAccessException | InstantiationException e) {
                 e.printStackTrace();
@@ -92,7 +92,7 @@ public class Unit extends AppCompatActivity implements OnFragmentInteractionList
                         .commit();
                 currentFragment = fr;
             }
-            current++;
+            currentTask++;
         } else {
             dbHelper.updateTargetProgress(UNIT_NAME);
             finish();

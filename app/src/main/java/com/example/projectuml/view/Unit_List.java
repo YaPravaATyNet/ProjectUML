@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.example.projectuml.MainActivity;
 import com.example.projectuml.R;
 import com.example.projectuml.db.DatabaseHelper;
 
@@ -19,10 +18,13 @@ public class Unit_List extends AppCompatActivity {
 
     public static String UNIT_NAME_TAG = "UNIT_NAME_TAG";
     private int TYPE;
+
     ListView userList;
     TextView header;
+
     DatabaseHelper databaseHelper;
     SQLiteDatabase db;
+
     Cursor userCursor;
     SimpleCursorAdapter userAdapter;
 
@@ -32,7 +34,7 @@ public class Unit_List extends AppCompatActivity {
         setContentView(R.layout.activity_unit__list);
 
         Intent intent = getIntent();
-        TYPE = intent.getIntExtra(MainActivity.EXTRA_MESSAGE, 0);
+        TYPE = intent.getIntExtra(Learning.EXTRA_MESSAGE, 0);
 
         header = findViewById(R.id.header);
         userList = findViewById(R.id.list);

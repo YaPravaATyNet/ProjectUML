@@ -1,9 +1,10 @@
-package com.example.projectuml;
+package com.example.projectuml.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.projectuml.R;
 import com.example.projectuml.db.DatabaseHelper;
 
 public class Statistics extends AppCompatActivity {

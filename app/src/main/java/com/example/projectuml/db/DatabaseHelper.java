@@ -5,9 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.projectuml.Target;
-import com.example.projectuml.TargetState;
-import com.example.projectuml.TargetType;
+import com.example.projectuml.model.Target;
+import com.example.projectuml.model.TargetState;
+import com.example.projectuml.model.TargetType;
 import com.example.projectuml.model.Task;
 import com.example.projectuml.view.GR_Task_1_fragment;
 import com.example.projectuml.view.GR_Task_2_fragment;
@@ -384,7 +384,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String SQLRequestUpdate = "UPDATE " + TABLE_TARGETS + " SET " + COLUMN_TARGET_PROGRESS + " = '" + current + "' WHERE " + COLUMN_TARGET_ID + " = " + id;
             db.execSQL(SQLRequestUpdate);
             if (current == quantity) {
-                GregorianCalendar start = Target.parseString(cursor.getString(3));
+                GregorianCalendar start = Target.parseStringToDate(cursor.getString(3));
                 start.add(Calendar.DAY_OF_MONTH, cursor.getInt(5));
                 start.add(Calendar.HOUR_OF_DAY, cursor.getInt(4));
                 Date curDate = new Date();

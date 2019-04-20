@@ -1,6 +1,10 @@
 package com.example.projectuml.model;
 
 public class Task {
+    private String question;
+    private String answer;
+    private Class<?> cls;
+
     public Task(String question, String answer, Class<?> cls) {
         this.question = question;
         this.answer = answer;
@@ -19,9 +23,4 @@ public class Task {
     public Class<?> getCls() {
         return cls;
     }
-
-    private String question;
-    private String answer;
-    private Class<?> cls;
-
 }

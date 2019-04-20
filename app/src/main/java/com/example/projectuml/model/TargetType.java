@@ -1,4 +1,4 @@
-package com.example.projectuml;
+package com.example.projectuml.model;
 
 public enum TargetType {
     WORDS,

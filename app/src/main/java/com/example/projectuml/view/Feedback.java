@@ -1,10 +1,12 @@
-package com.example.projectuml;
+package com.example.projectuml.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
+
+import com.example.projectuml.R;
 
 public class Feedback extends AppCompatActivity {
 

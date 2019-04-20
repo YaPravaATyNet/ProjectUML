@@ -1,7 +1,6 @@
-package com.example.projectuml;
+package com.example.projectuml.view;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +8,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.projectuml.R;
 import com.example.projectuml.db.DatabaseHelper;
+import com.example.projectuml.model.Target;
+import com.example.projectuml.view.TargetCreation;
+import com.example.projectuml.view.TargetDetailInfo;
 
 import java.util.ArrayList;
 

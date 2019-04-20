@@ -1,4 +1,4 @@
-package com.example.projectuml;
+package com.example.projectuml.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -22,7 +22,7 @@ public class Target implements Serializable {
         this.quantity = quantity;
         this.hours = hours;
         this.days = day;
-        this.start = parseString(start);
+        this.start = parseStringToDate(start);
         this.progress = progress;
         this.state = state;
     }
@@ -37,10 +37,6 @@ public class Target implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public TargetType getType() {
-        return type;
     }
 
     public int getQuantity() {
@@ -67,7 +63,7 @@ public class Target implements Serializable {
         return state;
     }
 
-    public static GregorianCalendar parseString(String str) {
+    public static GregorianCalendar parseStringToDate(String str) {
         GregorianCalendar date = new GregorianCalendar();
         date.set(Calendar.YEAR, Integer.parseInt(str.split(" ")[0].split("-")[0]));
         date.set(Calendar.MONTH, Integer.parseInt(str.split(" ")[0].split("-")[1]) - 1);

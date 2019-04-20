@@ -1,11 +1,14 @@
-package com.example.projectuml;
+package com.example.projectuml.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.projectuml.R;
+import com.example.projectuml.model.TargetState;
 import com.example.projectuml.db.DatabaseHelper;
+import com.example.projectuml.model.Target;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -13,11 +16,13 @@ import java.util.GregorianCalendar;
 
 public class TargetDetailInfo extends AppCompatActivity {
 
+    Target target;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_target);
-        Target target = (Target) getIntent().getExtras().getSerializable("target");
+        target = (Target) getIntent().getExtras().getSerializable("target");
         TextView name = (TextView) findViewById(R.id.name_target);
         name.setText(target.getName());
 
