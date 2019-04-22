@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="20dp"
     tools:context=".view.Unit">
 
     <TextView
@@ -20,17 +21,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Проверить" />
-
-        <Button
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Дальше" />
-    </LinearLayout>
 
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container1">
+
+    </ScrollView>
 
 </LinearLayout>

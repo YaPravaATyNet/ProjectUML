@@ -38,7 +38,7 @@ public class Unit extends AppCompatActivity implements OnFragmentInteractionList
         setContentView(R.layout.activity_unit);
 
         next = findViewById(R.id.next);
-        check = findViewById(R.id.check);
+        //check = findViewById(R.id.check);
 
         Intent intent = getIntent();
         UNIT_NAME = intent.getStringExtra(Unit_List.UNIT_NAME_TAG);
@@ -58,15 +58,7 @@ public class Unit extends AppCompatActivity implements OnFragmentInteractionList
             }
         });
 
-        check.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentFragment != null) {
-                    Toast.makeText(getApplicationContext(),
-                            ((Checkable) currentFragment).check() ? "Correct" : "Incorrect", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
     }
 
     private void showNextFragment() {
@@ -83,12 +75,12 @@ public class Unit extends AppCompatActivity implements OnFragmentInteractionList
             }
             if (currentFragment == null) {
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.container, fr)
+                        .add(R.id.container1, fr)
                         .commit();
                 currentFragment = fr;
             } else {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, fr)
+                        .replace(R.id.container1, fr)
                         .commit();
                 currentFragment = fr;
             }

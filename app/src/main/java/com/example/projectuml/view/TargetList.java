@@ -45,8 +45,8 @@ public class TargetList extends AppCompatActivity {
         });
     }
 
-    public void createNewTarget(View v) {
-        Intent intention = new Intent(v.getContext(), TargetCreation.class);
+    public void createNewTarget(View view) {
+        Intent intention = new Intent(view.getContext(), TargetCreation.class);
         startActivity(intention);
     }
 }

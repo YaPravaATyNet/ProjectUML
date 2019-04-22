@@ -7,13 +7,25 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.projectuml.R;
+import com.example.projectuml.db.DatabaseHelper;
 import com.example.projectuml.model.Checkable;
 
 public class V_Task_3_fragment extends Fragment implements Checkable {
 
     private OnFragmentInteractionListener mListener;
+
+    RadioButton rb_1;
+    RadioButton rb_2;
+    RadioButton rb_3;
+    RadioButton rb_4;
+    RadioGroup rg;
+
+    DatabaseHelper dbHelper;
 
     public V_Task_3_fragment() {
         // Required empty public constructor
@@ -23,8 +35,51 @@ public class V_Task_3_fragment extends Fragment implements Checkable {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_v__task_3_fragment, container, false);
+        final View v = inflater.inflate(R.layout.fragment_v__task_3_fragment, container, false);
+        ImageView imgv = v.findViewById(R.id.question);
+        imgv.setImageDrawable(v.getContext().getResources().getDrawable(Integer.valueOf(getArguments().getString(Unit.QUESTION))));
+
+        dbHelper = new DatabaseHelper(getContext());
+
+        rg = v.findViewById(R.id.radios_type_3);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (check()) {
+                    dbHelper.updateTaskState(dbHelper.getReadableDatabase(), getArguments().getString(Unit.QUESTION), getArguments().getString(Unit.ANSWER));
+                }
+                onButtonPressed(check());
+            }
+        });
+
+        rb_1 = v.findViewById(R.id.first_var);
+        rb_2 = v.findViewById(R.id.second_var);
+        rb_3 = v.findViewById(R.id.third_var);
+        rb_4 = v.findViewById(R.id.fourth_var);
+
+        rb_1.setText(dbHelper.getTrash(dbHelper.getReadableDatabase(), 1, 10));
+        rb_2.setText(dbHelper.getTrash(dbHelper.getReadableDatabase(), 1, 10));
+        rb_3.setText(dbHelper.getTrash(dbHelper.getReadableDatabase(), 1, 10));
+        rb_4.setText(dbHelper.getTrash(dbHelper.getReadableDatabase(), 1, 10));
+
+        int random = DatabaseHelper.getIntRandomFromRange(1, 4);
+
+        switch (random) {
+            case 1:
+                rb_1.setText(getArguments().getString(Unit.ANSWER));
+                break;
+            case 2:
+                rb_2.setText(getArguments().getString(Unit.ANSWER));
+                break;
+            case 3:
+                rb_3.setText(getArguments().getString(Unit.ANSWER));
+                break;
+            case 4:
+                rb_4.setText(getArguments().getString(Unit.ANSWER));
+                break;
+        }
+
+        return v;
     }
 
     public void onButtonPressed(boolean correct) {
@@ -52,6 +107,16 @@ public class V_Task_3_fragment extends Fragment implements Checkable {
 
     @Override
     public boolean check() {
-        return false;
+        return ((RadioButton)
+                getView()
+                        .findViewById(
+                                ((RadioGroup)
+                                        getView()
+                                                .findViewById(R.id.radios_type_3))
+                                        .getCheckedRadioButtonId()))
+                .getText()
+                .toString()
+                .equals(getArguments()
+                        .getString(Unit.ANSWER));
     }
 }

@@ -18,13 +18,13 @@ public class Learning extends AppCompatActivity {
         setContentView(R.layout.activity_learning);
     }
 
-    public void onClickGrammar(View v) {
+    public void onClickGrammar(View view) {
         Intent intent = new Intent(getApplicationContext(), Unit_List.class);
         intent.putExtra(EXTRA_MESSAGE, 0);
         startActivity(intent);
     }
 
-    public void  onClickVocabulary(View v) {
+    public void  onClickVocabulary(View view) {
         Intent intent = new Intent(getApplicationContext(), Unit_List.class);
         intent.putExtra(EXTRA_MESSAGE, 1);
         startActivity(intent);

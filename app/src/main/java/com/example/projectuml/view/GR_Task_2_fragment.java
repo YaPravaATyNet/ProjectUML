@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.projectuml.R;
 import com.example.projectuml.model.Checkable;
@@ -23,8 +26,16 @@ public class GR_Task_2_fragment extends Fragment implements Checkable {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gr__task_2_fragment, container, false);
+        final View v = inflater.inflate(R.layout.fragment_gr__task_2_fragment, container, false);
+        ((TextView) v.findViewById(R.id.question)).setText(getArguments().getString(Unit.QUESTION));
+
+        ((Button) v.findViewById(R.id.check)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonPressed(check());
+            }
+        });
+        return v;
     }
 
     public void onButtonPressed(boolean correct) {
@@ -52,6 +63,6 @@ public class GR_Task_2_fragment extends Fragment implements Checkable {
 
     @Override
     public boolean check() {
-        return false;
+        return ((EditText) getView().findViewById(R.id.answer)).getText().toString().equals(getArguments().getString(Unit.ANSWER));
     }
 }

@@ -18,7 +18,7 @@ public class V_Task_1_fragment extends Fragment implements Checkable {
 
     private OnFragmentInteractionListener mListener;
 
-    private int correctAnswer = 0;
+    //private int correctAnswer = 0;
 
     RadioButton rb_1;
     RadioButton rb_2;
@@ -57,13 +57,13 @@ public class V_Task_1_fragment extends Fragment implements Checkable {
         rb_3 = v.findViewById(R.id.third_var);
         rb_4 = v.findViewById(R.id.fourth_var);
 
-        rb_1.setText(dbHelper.getTrash(dbHelper.getReadableDatabase()));
-        rb_2.setText(dbHelper.getTrash(dbHelper.getReadableDatabase()));
-        rb_3.setText(dbHelper.getTrash(dbHelper.getReadableDatabase()));
-        rb_4.setText(dbHelper.getTrash(dbHelper.getReadableDatabase()));
+        rb_1.setText(dbHelper.getTrash(dbHelper.getReadableDatabase(), 1, 10));
+        rb_2.setText(dbHelper.getTrash(dbHelper.getReadableDatabase(), 1, 10));
+        rb_3.setText(dbHelper.getTrash(dbHelper.getReadableDatabase(), 1, 10));
+        rb_4.setText(dbHelper.getTrash(dbHelper.getReadableDatabase(), 1, 10));
 
         int random = DatabaseHelper.getIntRandomFromRange(1, 4);
-        correctAnswer = random;
+        //correctAnswer = random;
 
         switch (random) {
             case 1:

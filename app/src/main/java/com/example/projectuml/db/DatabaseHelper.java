@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.projectuml.R;
 import com.example.projectuml.model.Target;
 import com.example.projectuml.model.TargetState;
 import com.example.projectuml.model.TargetType;
@@ -12,7 +13,7 @@ import com.example.projectuml.model.Task;
 import com.example.projectuml.view.GR_Task_1_fragment;
 import com.example.projectuml.view.GR_Task_2_fragment;
 import com.example.projectuml.view.GR_Task_3_fragment;
-import com.example.projectuml.view.GR_Task_4_fragment;
+import com.example.projectuml.view.Rule_Fragment;
 import com.example.projectuml.view.V_Task_1_fragment;
 import com.example.projectuml.view.V_Task_2_fragment;
 import com.example.projectuml.view.V_Task_3_fragment;
@@ -232,17 +233,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         log(createInsertUnit("Четвертый юнит", 1));
         db.execSQL(createInsertUnit("Четвертый юнит", 1));
 
+        log(createInsertTask(2, "Первое правило для первого юнита", 8, "Toast - тост\nUniversity - университет\nBus - автобус\nPhone - автобус", ""));
+        db.execSQL(createInsertTask(2, "Первое правило для первого юнита", 8, "Toast - тост\nUniversity - университет\nBus - автобус\nPhone - автобус", ""));
+
         log(createInsertTask(2, "Первое задание из первого юнита", 4, "Выберите правильный ответ(toast)?", "toast"));
         db.execSQL(createInsertTask(2, "Первое задание из первого юнита", 4, "Выберите правильный ответ(toast)?", "toast"));
 
-        log(createInsertTask(2, "Второе задание из первого юнита", 4, "Выберите правильный ответ(university)?", "university"));
-        db.execSQL(createInsertTask(2, "Второе задание из первого юнита", 4, "Выберите правильный ответ(university)?", "university"));
+        log(createInsertTask(2, "Второе задание из первого юнита", 5, "Выберите правильный ответ(twitter)?", String.valueOf(R.drawable.i1)));
+        db.execSQL(createInsertTask(2, "Второе задание из первого юнита", 5, "Выберите правильный ответ(twitter)?", String.valueOf(R.drawable.i1)));
 
-        log(createInsertTask(2, "Третье задание из первого юнита", 4, "Выберите правильный ответ(bus)?", "bus"));
-        db.execSQL(createInsertTask(2, "Третье задание из первого юнита", 4, "Выберите правильный ответ(bus)?", "bus"));
+        log(createInsertTask(2, "Третье задание из первого юнита", 6, String.valueOf(R.drawable.i1), "twitter"));
+        db.execSQL(createInsertTask(2, "Третье задание из первого юнита", 6, String.valueOf(R.drawable.i1), "twitter"));
 
-        log(createInsertTask(2, "Четвертое задание из первого юнита", 4, "Выберите правильный ответ(phone)?", "phone"));
-        db.execSQL(createInsertTask(2, "Четвертое задание из первого юнита", 4, "Выберите правильный ответ(phone)?", "phone"));
+        log(createInsertTask(2, "Четвертое задание из первого юнита", 7, String.valueOf(R.raw.record), "twitter"));
+        db.execSQL(createInsertTask(2, "Четвертое задание из первого юнита", 7, String.valueOf(R.raw.record), "twitter"));
+
+        log(createInsertTask(1, "Первое правило для второго юнита", 8, "Первое правило бойцовского клуба - никому не рассказывать о бойцовском клубе", ""));
+        db.execSQL(createInsertTask(1, "Первое правило для второго юнита", 8, "Первое правило бойцовского клуба - никому не рассказывать о бойцовском клубе", ""));
+
+        log(createInsertTask(1, "Первое задание из второго юнита", 0, "Ben is little boy. He ... six (is)", "is"));
+        db.execSQL(createInsertTask(1, "Первое задание из второго юнита", 0, "Ben is little boy. He ... six (is)", "is"));
+
+        log(createInsertTask(1, "Второе задание из второго юнита", 1, "Ben is little boy. He ... six (is)", "is"));
+        db.execSQL(createInsertTask(1, "Второе задание из второго юнита", 1, "Ben is little boy. He ... six (is)", "is"));
+
+        log(createInsertTask(1, "Третье задание из второго юнита", 2, "Ben is little boy. He are six!  (are->is)", "Ben is little boy. He are six"));
+        db.execSQL(createInsertTask(1, "Третье задание из второго юнита", 2, "Ben is little boy. He are six!  (are->is)", "Ben is little boy. He are six"));
+
+
+//        log(createInsertTask(2, "Второе задание из первого юнита", 4, "Выберите правильный ответ(university)?", "university"));
+//        db.execSQL(createInsertTask(2, "Второе задание из первого юнита", 4, "Выберите правильный ответ(university)?", "university"));
+//
+//        log(createInsertTask(2, "Третье задание из первого юнита", 4, "Выберите правильный ответ(bus)?", "bus"));
+//        db.execSQL(createInsertTask(2, "Третье задание из первого юнита", 4, "Выберите правильный ответ(bus)?", "bus"));
+//
+//        log(createInsertTask(2, "Четвертое задание из первого юнита", 4, "Выберите правильный ответ(phone)?", "phone"));
+//        db.execSQL(createInsertTask(2, "Четвертое задание из первого юнита", 4, "Выберите правильный ответ(phone)?", "phone"));
 
         log(createInsertTrash("car"));
         db.execSQL(createInsertTrash("car"));
@@ -273,6 +299,66 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         log(createInsertTrash("delicious"));
         db.execSQL(createInsertTrash("delicious"));
+
+        log(createInsertTrash(String.valueOf(R.drawable.i8)));
+        db.execSQL(createInsertTrash(String.valueOf(R.drawable.i8)));
+
+        log(createInsertTrash(String.valueOf(R.drawable.i1)));
+        db.execSQL(createInsertTrash(String.valueOf(R.drawable.i1)));
+
+        log(createInsertTrash(String.valueOf(R.drawable.i2)));
+        db.execSQL(createInsertTrash(String.valueOf(R.drawable.i2)));
+
+        log(createInsertTrash(String.valueOf(R.drawable.i9)));
+        db.execSQL(createInsertTrash(String.valueOf(R.drawable.i9)));
+
+        log(createInsertTrash(String.valueOf(R.drawable.i3)));
+        db.execSQL(createInsertTrash(String.valueOf(R.drawable.i3)));
+
+        log(createInsertTrash(String.valueOf(R.drawable.i4)));
+        db.execSQL(createInsertTrash(String.valueOf(R.drawable.i4)));
+
+        log(createInsertTrash(String.valueOf(R.drawable.i5)));
+        db.execSQL(createInsertTrash(String.valueOf(R.drawable.i5)));
+
+        log(createInsertTrash(String.valueOf(R.drawable.i6)));
+        db.execSQL(createInsertTrash(String.valueOf(R.drawable.i6)));
+
+        log(createInsertTrash(String.valueOf(R.drawable.i7)));
+        db.execSQL(createInsertTrash(String.valueOf(R.drawable.i7)));
+
+        log(createInsertTrash(String.valueOf(R.drawable.i10)));
+        db.execSQL(createInsertTrash(String.valueOf(R.drawable.i10)));
+
+        log(createInsertTrash("are"));
+        db.execSQL(createInsertTrash("are"));
+
+        log(createInsertTrash("am"));
+        db.execSQL(createInsertTrash("am"));
+
+        log(createInsertTrash("was"));
+        db.execSQL(createInsertTrash("was"));
+
+        log(createInsertTrash("were"));
+        db.execSQL(createInsertTrash("were"));
+
+        log(createInsertTrash("will"));
+        db.execSQL(createInsertTrash("will"));
+
+        log(createInsertTrash("been"));
+        db.execSQL(createInsertTrash("been"));
+
+        log(createInsertTrash("have benn"));
+        db.execSQL(createInsertTrash("have benn"));
+
+        log(createInsertTrash("had been"));
+        db.execSQL(createInsertTrash("had been"));
+
+        log(createInsertTrash("have had been"));
+        db.execSQL(createInsertTrash("have had been"));
+
+        log(createInsertTrash("had have been"));
+        db.execSQL(createInsertTrash("had have been"));
     }
 
     private String createInsertUnit(String name, int type) {
@@ -461,9 +547,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 case 2:
                     result.add(new Task(csrBuf.getString(4), csrBuf.getString(5), GR_Task_3_fragment.class));
                     break;
-                case 3:
+                /*case 3:
                     result.add(new Task(csrBuf.getString(4), csrBuf.getString(5), GR_Task_4_fragment.class));
-                    break;
+                    break;*/
                 case 4:
                     result.add(new Task(csrBuf.getString(4), csrBuf.getString(5), V_Task_1_fragment.class));
                     break;
@@ -476,6 +562,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 case 7:
                     result.add(new Task(csrBuf.getString(4), csrBuf.getString(5), V_Task_4_fragment.class));
                     break;
+                case 8:
+                    result.add(new Task(csrBuf.getString(4), csrBuf.getString(5), Rule_Fragment.class));
+                    break;
             }
             if (csrBuf.isLast()) {
                 break;
@@ -486,10 +575,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public String getTrash(SQLiteDatabase db) {
+    public String getTrash(SQLiteDatabase db, int min, int max) {
         log("SELECT * FROM " + TABLE_TRASH);
         Cursor csrBuf = db.rawQuery("SELECT * FROM " + TABLE_TRASH, null);
-        csrBuf.move(getIntRandomFromRange(1, 10));
+        csrBuf.move(getIntRandomFromRange(min, max));
         return csrBuf.getString(1);
     }
 
